@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router/auto'
 import { RouteNamedMap } from 'vue-router/auto-routes'
 
-const router = useRouter()
-const myRouteName = 'Foo1' as keyof RouteNamedMap
+interface NavigationItem {
+  name: keyof RouteNamedMap
+  title: string
+}
 
-router.push({name: myRouteName })
+const navigationItems: NavigationItem[] = [
+  { name: 'Foo1', title: 'Foo1' },
+  { name: 'Foo2', title: 'Foo2' },
+  { name: 'Foo3', title: 'Foo3' },
+]
+
 </script>
 
 <template>
-  <div></div>
+  <div v-for="{ title, name } in navigationItems">
+    <router-link :to="{name}">{{ title }}</router-link>
+  </div>
 </template>
